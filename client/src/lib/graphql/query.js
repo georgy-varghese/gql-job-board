@@ -63,12 +63,21 @@ export const jobByIdQuery = gql`
 `;
 
 export const jobsQuery = gql`
-  query {
-    jobs {
-      ...JobDetails
+  query getJobs($limit: Int, $offset: Int) {
+    jobs(limit: $limit, offset: $offset) {
+      jobList {
+        id
+        date
+        title
+        description
+        company {
+          id
+          name
+        }
+      }
+      totalJobs
     }
   }
-  ${JobsDetailsFragment}
 `;
 
 // Mutation
